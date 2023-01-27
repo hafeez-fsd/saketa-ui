@@ -2,12 +2,12 @@
     <li class="list-group-item">
         <h6>Department</h6>
     </li>
-    <li *ngFor="let item of departments" class="list-group-item text-muted">{{item.name}} ({{item.count}})</li>
+    <li *ngFor="let item of departments" class="list-group-item text-muted"  (click)="collectSidebarDept(item.name)">{{item.name}} ({{item.count}})</li>
 </ul>
 
 <ul>
     <li class="list-group-item">
         <h6>Office</h6>
     </li>
-    <li *ngFor="let item of officeLocations" class="list-group-item text-muted">{{item.name}} ({{item.count}})</li>
+    <li *ngFor="let item of officeLocations" class="list-group-item text-muted" (click)="collectSidebarOfficeLocation(item.name)">{{item.name}} ({{item.count}})</li>
 </ul>

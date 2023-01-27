@@ -20,16 +20,17 @@ export class AditEmployeeComponent implements OnChanges {
     officePlace:''
   };
 
+
+  constructor(private dataService: DataService){
+
+  }
+
   submitForm(aditForm:any, submitEvent:any){
     submitEvent.preventDefault();
     // console.log(this.employee);
     this.dataService.addEmployee(this.employee);
     this.saveEvent.emit(true);
     this.clear();
-  }
-
-  constructor(private dataService: DataService){
-
   }
 
   loadData(){

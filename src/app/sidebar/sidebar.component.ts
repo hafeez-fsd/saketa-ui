@@ -20,6 +20,20 @@ export class SidebarComponent implements OnInit{
       this.departments = this.dataService.getCountsByDept();
       this.officeLocations = this.dataService.getCountsByLocation();
   }
+
+
+  collectSidebarDept(sidebarDept:any){
+    // console.log(sidebarDept);
+    this.dataService.sidebarDept=sidebarDept;
+    this.dataService.filterData();
+  }
+
+  collectSidebarOfficeLocation(sidebarOfficeLocation:any){
+    // console.log(sidebarOfficeLocation);
+    this.dataService.sidebarOffice=sidebarOfficeLocation;
+    this.dataService.filterData();
+  }
+
 }
 
 

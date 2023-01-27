@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs';
 import {DataService} from '../shared/services/data.service'
 
 @Component({
@@ -32,7 +33,23 @@ export class EmployeeComponent implements OnInit{
 
   loadData(){
     this.employees=this.dataService.employees;
+    // this.employees=this.dataService.filteredData;
 
+  }
+  collectAlphabet(alphabet:any){
+    this.dataService.alphabetKey=alphabet;
+    this.dataService.filterData();
+  }
+  collectKeyword(keywordSearchEvent:any){
+    // console.log(keywordSearchEvent.value);
+    this.dataService.searchKeyword=keywordSearchEvent.value;
+    this.dataService.filterData();
+  }
+
+  collectFilterTop(filterTopEvent:any){
+    // console.log(filterTopEvent.target.value);
+    this.dataService.filterTop=filterTopEvent.target.value;
+    this.dataService.filterData();
   }
 
   

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { filter } from 'rxjs';
 import { Employee } from '../models/employee';
 
@@ -6,7 +6,7 @@ import { Employee } from '../models/employee';
   providedIn: 'root'
 })
 
-export class DataService {
+export class DataService implements OnChanges{
 employees:Employee[] = [
   {
     id:1,
@@ -121,6 +121,10 @@ officeLocations =[
   {name: 'Seattle', count:0}
 ];
 
+filteredData=this.employees;
+
+
+
 getEmployee(id: number): Employee{
   return <Employee>this.employees.find(e => e.id==id);
 }
@@ -163,15 +167,54 @@ getCountsByLocation(){
   return this.officeLocations;
 }
 
-sidebarDept:any;
-sidebarOffice:any;
-alphabetKey:any;
-searchKeyword:any;
-filterTop:any;
+sidebarDept?:any='';
+sidebarOffice?:any='';
+alphabetKey?:any='';
+searchKeyword?:any='';
+filterTop:any='';
 
-filterData(){
+ngOnChanges(changes: SimpleChanges): void {
+  
   
 }
+
+filterData(){
+  let filteredData=this.employees.filter(e=>e.firstName.toLowerCase().startsWith(this.alphabetKey.toLowerCase())
+  && (
+    (e.firstName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+    (e.lastName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+    (e.dept.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+    (e.role.toLowerCase().includes(this.searchKeyword.toLowerCase())) ||
+    (e.officePlace.toLowerCase().includes(this.searchKeyword.toLowerCase()))
+  )
+
+  && (
+
+    e.dept.toLowerCase().includes(this.sidebarDept.toLowerCase())
+  )
+
+  && (
+
+    e.officePlace.toLowerCase().includes(this.sidebarOffice.toLowerCase())
+  )
+
+  // && (
+    
+    // e.toLowerCase().includes(this.sidebarOffice.toLowerCase())
+    // e[this.filterTop as keyof object].toLowerCase().includes(this.sidebarOffice.toLowerCase())
+  // )
+    
+  );
+  
+  this.filteredData=filteredData;
+  console.log(this.filteredData);
+
+  // return filteredData;
+
+}
+
+
+
 
 }
 

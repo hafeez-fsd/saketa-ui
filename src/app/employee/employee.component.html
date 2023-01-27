@@ -1,12 +1,12 @@
 <section class="border border-2 p-1 mt-1">
     <div class="d-flex">
-        <button class="btn btn-info text-white  m-1" *ngFor="let item of alphabets">{{item | uppercase}}</button>
+        <button class="btn btn-info text-white  m-1" *ngFor="let item of alphabets" (click)="collectAlphabet(item)">{{item | uppercase}}</button>
     </div>
 
     <div class="row my-4">
         <div class="col-3">
             <label for="searchInput">Search:&nbsp;</label>
-            <input id="searchInput" type="text" minlength="3" maxlength="20" placeholder="Enter a keyword">
+            <input id="searchInput" type="text" minlength="3" maxlength="20" placeholder="Enter a keyword" (keyup)="collectKeyword(searchKeywordInput)" #searchKeywordInput>
         </div>
 
         <div class="col-3">
@@ -18,13 +18,13 @@
                     <label for="filterTop">Filter By: &nbsp;</label>
                 </div>
                 <div class="col">
-                    <select id="filterTop" class="form-select form-control">
-                        <option selected disabled value="First Name">Choose a filter</option>
-                        <option value="First Name">First Name</option>
-                        <option value="Last Name">Last Name</option>
-                        <option value="Department">Department</option>
-                        <option value="Role">Role</option>
-                        <option value="Office Place">Office Place</option>
+                    <select id="filterTop" class="form-select form-control" (change)="collectFilterTop($event)">
+                        <option selected disabled value="Default Value">Choose a filter</option>
+                        <option value="firstName">First Name</option>
+                        <option value="lastName">Last Name</option>
+                        <option value="dept">Department</option>
+                        <option value="role">Role</option>
+                        <option value="officePlace">Office Place</option>
                     </select>
                 </div>
             </div>
