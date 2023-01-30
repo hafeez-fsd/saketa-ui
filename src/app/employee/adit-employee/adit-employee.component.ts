@@ -26,11 +26,14 @@ export class AditEmployeeComponent implements OnChanges {
   }
 
   submitForm(aditForm:any, submitEvent:any){
-    submitEvent.preventDefault();
-    // console.log(this.employee);
+    // submitEvent.preventDefault();
+    alert();
+    console.log(aditForm);
+    console.log("submitForm() invoked");
     this.dataService.addEmployee(this.employee);
     this.saveEvent.emit(true);
-    this.clear();
+    // console.log(aditForm);
+    this.clear(aditForm);
   }
 
   loadData(){
@@ -43,7 +46,9 @@ export class AditEmployeeComponent implements OnChanges {
       }
   }
 
-  clear(){
+  aditForm:any;
+  clear(aditForm:any){
+    aditForm=this.aditForm;
     this.employee= {
       id: 0,
       image:'',
@@ -53,6 +58,13 @@ export class AditEmployeeComponent implements OnChanges {
       role:'',
       officePlace:''
     };
+
+    // aditForm.reset();
+
+  }
+
+  callClear(){
+    this.clear(this.aditForm);
   }
   
 

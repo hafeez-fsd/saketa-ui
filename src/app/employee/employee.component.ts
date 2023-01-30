@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { filter } from 'rxjs';
 import {DataService} from '../shared/services/data.service'
+import { AditEmployeeComponent } from './adit-employee/adit-employee.component';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })
-export class EmployeeComponent implements OnInit{
+export class EmployeeComponent implements OnInit, DoCheck{
   empId:number = 0;
   alphabets=['a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   employees:any=[];
@@ -52,7 +53,20 @@ export class EmployeeComponent implements OnInit{
     this.dataService.filterData();
   }
 
-  
+  ngDoCheck(){
+    this.employees=this.dataService.getFilteredData();
+    // console.log(this.dataService.getEmployees());
+  }
+
+  // ngAfterContentInit(){
+  //   this.employees=this.dataService.getFilteredData();
+  // }
+
+  @ViewChild(AditEmployeeComponent) aditEmployee:any
+
+  clear1(){
+    // this.aditEmployee.callClear();
+  }
   
 
 }

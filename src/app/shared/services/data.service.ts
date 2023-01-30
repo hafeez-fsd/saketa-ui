@@ -1,4 +1,4 @@
-import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
+import { DoCheck, Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { filter } from 'rxjs';
 import { Employee } from '../models/employee';
 
@@ -6,7 +6,7 @@ import { Employee } from '../models/employee';
   providedIn: 'root'
 })
 
-export class DataService implements OnChanges{
+export class DataService{
 employees:Employee[] = [
   {
     id:1,
@@ -121,7 +121,7 @@ officeLocations =[
   {name: 'Seattle', count:0}
 ];
 
-filteredData=this.employees;
+// filteredData=this.employees;
 
 
 
@@ -135,9 +135,11 @@ getEmployees(){
 
 addEmployee(emp:Employee){
   const obj = this.employees.at(-1);
+  console.log('prev emp length: '+ this.employees.length);
   if(obj){
     emp.id= obj.id+1;
     this.employees.push(emp);
+    console.log('present emp length: '+ this.employees.length);
   }
 }
 
@@ -171,47 +173,94 @@ sidebarDept?:any='';
 sidebarOffice?:any='';
 alphabetKey?:any='';
 searchKeyword?:any='';
-filterTop:any='';
+filterTop?:any='';
 
-ngOnChanges(changes: SimpleChanges): void {
-  
-  
-}
+// ngOnChanges(){
+  // console.log(this.filterTop);
+  // console.log(this.employees[this.filterTop as keyof Object]);
+
+// }
+
+
 
 filterData(){
-  let filteredData=this.employees.filter(e=>e.firstName.toLowerCase().startsWith(this.alphabetKey.toLowerCase())
-  && (
-    (e.firstName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
-    (e.lastName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
-    (e.dept.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
-    (e.role.toLowerCase().includes(this.searchKeyword.toLowerCase())) ||
-    (e.officePlace.toLowerCase().includes(this.searchKeyword.toLowerCase()))
-  )
-
-  && (
-
-    e.dept.toLowerCase().includes(this.sidebarDept.toLowerCase())
-  )
-
-  && (
-
-    e.officePlace.toLowerCase().includes(this.sidebarOffice.toLowerCase())
-  )
-
-  // && (
-    
-    // e.toLowerCase().includes(this.sidebarOffice.toLowerCase())
-    // e[this.filterTop as keyof object].toLowerCase().includes(this.sidebarOffice.toLowerCase())
-  // )
-    
-  );
+  // console.log("search keyword: "+this.searchKeyword, "filter Top: "+this.filterTop);
   
-  this.filteredData=filteredData;
-  console.log(this.filteredData);
+  let filteredData:any=this.employees;
 
-  // return filteredData;
+  if(this.filterTop==''){
+
+    filteredData=this.employees.filter(e=>
+      //alphabet button
+      e.firstName.toLowerCase().startsWith(this.alphabetKey.toLowerCase()) &&
+
+      (  
+        (e.firstName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+        (e.lastName.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+        (e.dept.toLowerCase().includes(this.searchKeyword.toLowerCase()))||
+        (e.role.toLowerCase().includes(this.searchKeyword.toLowerCase())) ||
+        (e.officePlace.toLowerCase().includes(this.searchKeyword.toLowerCase())) 
+      ) && 
+  
+      (
+        e.dept.toLowerCase().includes(this.sidebarDept.toLowerCase())
+      ) &&
+    
+      (
+        e.officePlace.toLowerCase().includes(this.sidebarOffice.toLowerCase())
+      ) 
+  
+    );
+
+  } else {
+
+    filteredData=this.employees.filter(e=>
+      //alphabet button
+      e.firstName.toLowerCase().startsWith(this.alphabetKey.toLowerCase()) &&
+
+      (  
+        this.searchAndFilter(e)
+      ) && 
+  
+      (
+        e.dept.toLowerCase().includes(this.sidebarDept.toLowerCase())
+      ) &&
+    
+      (
+        e.officePlace.toLowerCase().includes(this.sidebarOffice.toLowerCase())
+      ) 
+      
+  
+    );
+
+  }
+  
+  // console.log(this.employees[this.filterTop as keyof Object]);
+  // console.log(filteredData);
+  return filteredData;
 
 }
+
+searchAndFilter(e:any){
+  let bool:boolean;  
+  // console.log(e.dept);
+  bool= e[this.filterTop].toLowerCase().includes(this.searchKeyword.toLowerCase());
+
+  if(bool==true){
+    // console.log("searchAndFilter() returned True");
+    return true;
+  }
+  else {
+    // console.log("searchAndFilter() returned False");
+    return false;
+  }
+}
+
+getFilteredData(){
+  return this.filterData();
+}
+
+
 
 
 

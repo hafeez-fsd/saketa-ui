@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" id="lastNameInput" minlength="3" maxlength="20" required
                     placeholder="eg. Shaik" [(ngModel)]="employee.lastName" name="lastNameInput" #lastNameInput="ngModel">
                     <small id="lastNameAlert" *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']" class="form-text text-danger"> Last Name can't be empty</small> 
-                    <!-- <small id="firstNameAlert" *ngIf="firstNameInput.touched && firstNameInput.errors?.['minlength']" class="form-text text-danger"> First Name can't be shorter than 3 characters!</small>  -->
+                    
             </div>
 
             <div class="col col-12 mb-3">
@@ -55,7 +55,8 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!aditEmp.form.valid" >Submit</button>
+        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Submit</button>
+        <!-- [disabled]="!aditEmp.form.valid" -->
     </form>
 
 
