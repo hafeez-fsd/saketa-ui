@@ -1,6 +1,6 @@
 <div>
 
-    <form class="p-2" id="aditEmp" #aditEmp="ngForm" (ngSubmit)="submitForm(aditEmp, $event)">
+    <form class="p-2" id="aditEmp" #aditEmp="ngForm" (ngSubmit)="submitForm(aditEmp)">
         
         <div class="row">
 
@@ -55,7 +55,7 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Submit</button>
+        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">{{employee.id?'Update':'Add'}}</button>
         <!-- [disabled]="!aditEmp.form.valid" -->
     </form>
 

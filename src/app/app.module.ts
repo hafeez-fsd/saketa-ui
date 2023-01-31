@@ -21,7 +21,9 @@ import { DataService } from './shared/services/data.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, FormsModule, HttpClientModule
+    AppRoutingModule, 
+    FormsModule, 
+    HttpClientModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

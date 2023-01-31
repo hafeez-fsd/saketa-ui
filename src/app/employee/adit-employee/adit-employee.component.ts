@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from 'src/app/shared/models/employee';
 import { DataService } from 'src/app/shared/services/data.service';
 
@@ -25,19 +26,39 @@ export class AditEmployeeComponent implements OnChanges {
 
   }
 
-  submitForm(aditForm:any, submitEvent:any){
-    // submitEvent.preventDefault();
-    alert();
-    console.log(aditForm);
-    console.log("submitForm() invoked");
-    // this.dataService.addEmployee(this.employee);
+  submitForm(aditForm:NgForm){
+    if(this.employee.id){
+      // update the data
+      this.dataService.updateEmployee(this.employee.id, this.employee).subscribe(
+        res => {
+          console.log('--res', res);
+          aditForm.form.reset();
+        },
+        err=>{
+          console.log('--err', err);
+        }
+      );
+    }
+    else{
+      this.dataService.addEmployee(this.employee).subscribe(
+        res => {
+          console.log('--res', res);
+          aditForm.form.reset();
+        },
+        err=>{
+          console.log('--err', err);
+        }
+      );
+    }
+    
     this.saveEvent.emit(true);
-    // console.log(aditForm);
     this.clear(aditForm);
   }
 
   loadData(){
-    // this.employee = this.dataService.getEmployee(this.id);
+    this.dataService.getEmployee(this.id).subscribe(emp=>{
+      this.employee=emp;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -84,7 +84,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="display-6">Add/Edit Employee</h3>
+                    <h3 class="display-6">{{empId?'Update':'Add'}} Employee</h3>
+                    <button type="button" class="btn btn-primary" *ngIf="empId?true:false" (click)="deleteEmp(empId)" data-bs-dismiss="modal">Delete</button>
                 </div>
                 <div class="modal-body">
                     <app-adit-employee (saveEvent)="onSave()" [id]="empId"></app-adit-employee>
@@ -92,7 +93,6 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Submit</button> -->
                   </div>
             </div>
         </div>

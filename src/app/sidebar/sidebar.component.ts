@@ -13,23 +13,22 @@ export class SidebarComponent implements OnInit{
   officeLocations!:OfficeLocation[];
 
   constructor(private dataService: DataService){
-
   }
 
-  ngOnInit(): void {
-      // this.departments = this.dataService.getCountsByDept();
-      // this.officeLocations = this.dataService.getCountsByLocation();
+  ngOnInit() {
+      this.departments = this.dataService.getCountsByDept();
+      console.log(this.departments);
+      this.officeLocations = this.dataService.getCountsByLocation();
+      console.log(this.officeLocations);
+      
   }
-
 
   collectSidebarDept(sidebarDept:any){
-    // console.log(sidebarDept);
     this.dataService.sidebarDept=sidebarDept;
     // this.dataService.filterData();
   }
 
   collectSidebarOfficeLocation(sidebarOfficeLocation:any){
-    // console.log(sidebarOfficeLocation);
     this.dataService.sidebarOffice=sidebarOfficeLocation;
     // this.dataService.filterData();
   }
