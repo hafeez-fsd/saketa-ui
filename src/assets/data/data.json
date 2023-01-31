@@ -9,14 +9,6 @@
       "officePlace": "India"
     },
     {
-      "id": 2,
-      "firstName": "Helenhgfch",
-      "lastName": "Zimmerman",
-      "dept": "IT",
-      "role": "Operations Manager",
-      "officePlace": "India"
-    },
-    {
       "id": 3,
       "firstName": "Jonathan",
       "lastName": "Smith",
@@ -94,14 +86,6 @@
       "lastName": "Ventrapati",
       "dept": "PE",
       "role": "Associate Architect",
-      "officePlace": "India"
-    },
-    {
-      "id": 13,
-      "firstName": "Sandeep",
-      "lastName": "D",
-      "dept": "PE",
-      "role": "Senior SoftWare Developer",
       "officePlace": "India"
     }
   ]

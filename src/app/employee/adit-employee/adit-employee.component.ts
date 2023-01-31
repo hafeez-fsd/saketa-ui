@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ConfigService } from 'src/app/shared/config.service';
 import { Employee } from 'src/app/shared/models/employee';
 import { DataService } from 'src/app/shared/services/data.service';
 
@@ -52,6 +53,7 @@ export class AditEmployeeComponent implements OnChanges {
     }
     
     this.saveEvent.emit(true);
+    ConfigService.empSave.next(true);
     this.clear(aditForm);
   }
 

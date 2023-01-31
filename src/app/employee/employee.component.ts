@@ -82,7 +82,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmp(id:any){
-    this.dataService.deleteEmployee(id).subscribe(emp=> {});
+   let conf =  confirm(`Do you want to delet this employee?`);
+   if(conf){
+    this.dataService.deleteEmployee(id).subscribe(emp=> {
+      console.log(emp);
+      this.loadData();
+    });
+   }
     
   }
 
