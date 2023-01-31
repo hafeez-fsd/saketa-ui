@@ -30,14 +30,14 @@ export class AditEmployeeComponent implements OnChanges {
     alert();
     console.log(aditForm);
     console.log("submitForm() invoked");
-    this.dataService.addEmployee(this.employee);
+    // this.dataService.addEmployee(this.employee);
     this.saveEvent.emit(true);
     // console.log(aditForm);
     this.clear(aditForm);
   }
 
   loadData(){
-    this.employee = this.dataService.getEmployee(this.id);
+    // this.employee = this.dataService.getEmployee(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -33,28 +33,29 @@ export class EmployeeComponent implements OnInit, DoCheck{
   }
 
   loadData(){
-    this.employees=this.dataService.employees;
+    // this.employees=this.dataService.employees;
+    this.dataService.getEmployees().subscribe(data=> this.employees=data);
     // this.employees=this.dataService.filteredData;
 
   }
   collectAlphabet(alphabet:any){
     this.dataService.alphabetKey=alphabet;
-    this.dataService.filterData();
+    // this.dataService.filterData();
   }
   collectKeyword(keywordSearchEvent:any){
     // console.log(keywordSearchEvent.value);
     this.dataService.searchKeyword=keywordSearchEvent.value;
-    this.dataService.filterData();
+    // this.dataService.filterData();
   }
 
   collectFilterTop(filterTopEvent:any){
     // console.log(filterTopEvent.target.value);
     this.dataService.filterTop=filterTopEvent.target.value;
-    this.dataService.filterData();
+    // this.dataService.filterData();
   }
 
   ngDoCheck(){
-    this.employees=this.dataService.getFilteredData();
+    // this.employees=this.dataService.getFilteredData();
     // console.log(this.dataService.getEmployees());
   }
 
