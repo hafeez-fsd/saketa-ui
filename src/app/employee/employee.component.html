@@ -14,13 +14,13 @@
         <div class="col-4">
             <div class="row">
                 <div class="col col-2">
-                    <button class="btn rounded btn-success me-4" (click)="clear1()">Clear</button>
+                    <button class="btn rounded btn-success me-4" (click)="clearSearchAndFilterTop(searchKeywordInput,filterTop)">Clear</button>
                 </div>
                 <div class="col col-3 ms-4 me">
                     <label for="filterTop">Filter By:</label>
                 </div>
                 <div class="col">
-                    <select id="filterTop" class="form-select form-control" (change)="collectFilterTop($event)">
+                    <select id="filterTop" class="form-select form-control" (change)="collectFilterTop($event)" #filterTop>
                         <option selected disabled value="Default Value">Choose a filter</option>
                         <option value="firstName">First Name</option>
                         <option value="lastName">Last Name</option>

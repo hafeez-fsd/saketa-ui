@@ -3,10 +3,12 @@ import {
   Component,
   DoCheck,
   ElementRef,
+  EventEmitter,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { filter } from 'rxjs';
+import { ConfigService } from '../shared/config.service';
 import { DataService } from '../shared/services/data.service';
 import { AditEmployeeComponent } from './adit-employee/adit-employee.component';
 
@@ -60,8 +62,10 @@ export class EmployeeComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
 
+  aditEvent:any;
+
   onSave() {
-    alert();
+    // alert();
     this.loadData();
   }
 
@@ -82,17 +86,26 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmp(id:any){
-   let conf =  confirm(`Do you want to delet this employee?`);
-   if(conf){
+   let isConfirm =  confirm(`Do you want to delete this employee?`);
+   if(isConfirm){
     this.dataService.deleteEmployee(id).subscribe(emp=> {
       console.log(emp);
+      ConfigService.empSave.next(true);
       this.loadData();
     });
    }
     
   }
 
-  clear1(){
+  clearClicked=false;
+  clearSearchAndFilterTop(searchKeywordInput: any,filterTop: any){
+    this.clearClicked=true;
+    searchKeywordInput.value="";
+    filterTop.value="";
+  }
 
+  showAllCards(){
+    this.employees=this.dataService.employees;
+    this.clearClicked=false;
   }
 }
