@@ -11,18 +11,6 @@ export class DataService {
   endPoint: string = '/employees';
   url: string = `${this.baseUrl}${this.endPoint}`;
 
-  departments = [
-    { name: 'HR', count: 0 },
-    { name: 'IT', count: 0 },
-    { name: 'UX', count: 0 },
-    { name: 'PE', count: 0 },
-  ];
-
-  officeLocations = [
-    { name: 'India', count: 0 },
-    { name: 'Seattle', count: 0 },
-  ];
-
   sidebarDept?: any = '';
   sidebarOffice?: any = '';
   alphabetKey?: any = '';
@@ -32,18 +20,21 @@ export class DataService {
   employees: any;
   constructor(private http: HttpClient) {}
 
-  //Methods for adding data
-
+  //Header parameter that is to be passed in the 'post' req within 'headerOptions' (written below this)
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
 
+  //Methods for CRUD Operations
+
+  //Create
   addEmployee(emp: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.url, emp, this.httpOptions);
   }
 
+  //Read
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.url);
   }
@@ -52,10 +43,12 @@ export class DataService {
     return this.http.get<Employee>(`${this.url}/${id}`);
   }
 
+  //Update
   updateEmployee(id: number, emp: Employee): Observable<Employee> {
     return this.http.put<Employee>(`${this.url}/${id}`, emp, this.httpOptions);
   }
 
+  //Delete
   deleteEmployee(id: number): Observable<Employee> {
     return this.http.delete<Employee>(`${this.url}/${id}`);
   }

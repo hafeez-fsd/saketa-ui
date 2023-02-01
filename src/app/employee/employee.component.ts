@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { filter } from 'rxjs';
-import { ConfigService } from '../shared/config.service';
+import { ConfigService } from '../shared/services/config.service';
 import { DataService } from '../shared/services/data.service';
 import { AditEmployeeComponent } from './adit-employee/adit-employee.component';
 

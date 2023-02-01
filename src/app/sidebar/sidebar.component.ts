@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AditEmployeeComponent } from '../employee/adit-employee/adit-employee.component';
-import { ConfigService } from '../shared/config.service';
+import { ConfigService } from '../shared/services/config.service';
 import { Employee } from '../shared/models/employee';
 import { DataService } from '../shared/services/data.service';
-import { Department } from './models/department';
-import { OfficeLocation } from './models/officeLocation';
+import { Department } from '../shared/models/department';
+import { OfficeLocation } from '../shared/models/officeLocation';
 
 @Component({
   selector: 'app-sidebar',
@@ -57,11 +57,9 @@ export class SidebarComponent implements OnInit {
 
   collectSidebarDept(sidebarDept: any) {
     this.dataService.sidebarDept = sidebarDept;
-    // this.dataService.filterData();
   }
 
   collectSidebarOfficeLocation(sidebarOfficeLocation: any) {
     this.dataService.sidebarOffice = sidebarOfficeLocation;
-    // this.dataService.filterData();
   }
 }

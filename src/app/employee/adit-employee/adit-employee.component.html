@@ -12,7 +12,7 @@
             <div class="col col-6 mb-3">
                 <label for="firstNameInput" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="firstNameInput" minlength="3" maxlength="20" required
-                    placeholder="eg. Hafeez" [(ngModel)]="employee.firstName" name="firstNameInput" #firstNameInput="ngModel">
+                    placeholder="Enter First name" [(ngModel)]="employee.firstName" name="firstNameInput" #firstNameInput="ngModel">
                 <small id="firstNameAlert" *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']" class="form-text text-danger"> First Name can't be empty!</small>
                 <small id="firstNameAlert" *ngIf="firstNameInput.touched && firstNameInput.errors?.['minlength']" class="form-text text-danger"> First Name can't be shorter than 3 characters!</small> 
                 <small id="firstNameAlert" *ngIf="firstNameInput.touched && firstNameInput.errors?.['maxlength']" class="form-text text-danger"> First Name can't be longer than 20 characters!</small>        
@@ -21,7 +21,7 @@
             <div class="col col-6 mb-3">
                 <label for="lastNameInput" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastNameInput" minlength="3" maxlength="20" required
-                    placeholder="eg. Shaik" [(ngModel)]="employee.lastName" name="lastNameInput" #lastNameInput="ngModel">
+                    placeholder="Enter Last Name" [(ngModel)]="employee.lastName" name="lastNameInput" #lastNameInput="ngModel">
                     <small id="lastNameAlert" *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']" class="form-text text-danger"> Last Name can't be empty</small> 
                     
             </div>
@@ -29,7 +29,8 @@
             <div class="col col-12 mb-3">
                 <label class="form-label" for="deptInput">Department: </label>
                 <select id="deptInput" required class="form-control" [(ngModel)]="employee.dept" name="deptInput" #deptInput="ngModel">
-                    <option selected value="HR">HR</option>
+                    <option selected disabled value="default">Select Department</option>
+                    <option value="HR">HR</option>
                     <option value="IT">IT</option>
                     <option value="PE">PE</option>
                     <option value="UX">UX</option>
