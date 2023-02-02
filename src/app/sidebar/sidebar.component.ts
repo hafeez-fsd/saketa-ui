@@ -5,6 +5,7 @@ import { Employee } from '../shared/models/employee';
 import { DataService } from '../shared/services/data.service';
 import { Department } from '../shared/models/department';
 import { OfficeLocation } from '../shared/models/officeLocation';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,8 @@ import { OfficeLocation } from '../shared/models/officeLocation';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  selectedIndexDept:number=-1;
+  selectedIndexOfficePlace:number=-1;
   departments: Department[] = [
     { name: 'HR', count: 0 },
     { name: 'IT', count: 0 },
@@ -22,6 +25,23 @@ export class SidebarComponent implements OnInit {
   officeLocations: OfficeLocation[] = [
     { name: 'India', count: 0 },
     { name: 'Seattle', count: 0 },
+  ];
+
+  isDeptFilterActive:boolean[]=[false,false,false,false];
+  isOfficePlaceFilterActive:boolean[]=[false,false];
+
+  sidebarFilters=[
+    //0 for dept
+    {
+      type:'dept',
+      value:''
+    }, 
+
+    //1 for officePlace
+    {
+      type:'officePlace',
+      value:''
+    },
   ];
 
   constructor(private dataService: DataService) {}
@@ -55,11 +75,33 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  collectSidebarDept(sidebarDept: any) {
-    this.dataService.sidebarDept = sidebarDept;
+  
+
+  collectSidebarDept(sidebarDept: any, index:any) {
+    this.selectedIndexDept=this.selectedIndexDept==index?-1:index;
+    if(this.selectedIndexDept!=-1){
+      this.sidebarFilters[0].value=sidebarDept;
+      ConfigService.sidefilterChanged.emit(this.sidebarFilters);
+    }
+    else{
+      this.sidebarFilters[1].value='';
+      ConfigService.sidefilterChanged.emit(false);
+
+    }
+
+   
   }
 
-  collectSidebarOfficeLocation(sidebarOfficeLocation: any) {
-    this.dataService.sidebarOffice = sidebarOfficeLocation;
+  collectSidebarOfficeLocation(sidebarOfficePlace: any, index:any) {
+    this.selectedIndexOfficePlace=this.selectedIndexOfficePlace==index?-1:index;
+    if(this.selectedIndexOfficePlace!=-1){
+      this.sidebarFilters[1].value=sidebarOfficePlace;
+      ConfigService.sidefilterChanged.emit(this.sidebarFilters);
+    }
+    else{
+      this.sidebarFilters[1].value='';
+      ConfigService.sidefilterChanged.emit(false);
+    }
+
   }
 }

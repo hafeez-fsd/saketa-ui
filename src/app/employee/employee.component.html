@@ -1,7 +1,7 @@
 <section class="p-1 m-1 pb-0">
     <div class="row">
-        <div class="col m-1 p-0" *ngFor="let item of alphabets">
-            <button class="btn btn-info text-white" (click)="collectAlphabet(item)">{{item | uppercase}}</button>
+        <div class="col m-1 p-0" *ngFor="let item of alphabets; let i=index">
+            <button class="btn btn-info text-white" (click)="collectAlphabet(item, i)" [class.bg-success]="selectedAlphabet==i" [class.border-success]="selectedAlphabet==i">{{item | uppercase}}</button>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col">
                     <select id="filterTop" class="form-select form-control" (change)="collectFilterTop($event)" #filterTop>
-                        <option selected disabled value="Default Value">Choose a filter</option>
+                        <option selected disabled value="defaultValue">Choose a filter</option>
                         <option value="firstName">First Name</option>
                         <option value="lastName">Last Name</option>
                         <option value="dept">Department</option>
@@ -49,9 +49,9 @@
 </section>
 
 <section class="border m-1 p-3">
-    <div class="row mt-1">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 col-xs-8 my-1 px-1" *ngFor="let item of employees">
-            <div class="card p-2 bg-emp-card" (click)="empId=item.id; b12.click()" *ngIf="employees.length!=0; else noResults"> 
+    <div class="row mt-1"*ngIf="filteredData.length!=0 else noResults">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 col-xs-8 my-1 px-1" *ngFor="let item of filteredData">
+            <div class="card p-2 bg-emp-card" (click)="empId=item.id; b12.click()"> 
                 <div class="row">
                     <div class="col-3">
                         <img class="rounded" src="../../assets/andrew philips.jpeg" alt="" height="90px" width="70px">
@@ -67,14 +67,14 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <ng-template #noResults ><div class="noResults">
-                <h2>Oops!</h2><p>Couldn't find any match. <br> Kindly check and try again.</p>
-              </div>
-            </ng-template>
         </div>
     </div>
+    <ng-template #noResults >
+        <div class="noResults">
+        <h2>Oops!</h2><p>Couldn't find any match. <br> Kindly check and try again.</p>
+      </div>
+    </ng-template>
 </section>
 
 

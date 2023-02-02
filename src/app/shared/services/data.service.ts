@@ -10,13 +10,6 @@ export class DataService {
   baseUrl: string = 'http://localhost:3000';
   endPoint: string = '/employees';
   url: string = `${this.baseUrl}${this.endPoint}`;
-
-  sidebarDept?: any = '';
-  sidebarOffice?: any = '';
-  alphabetKey?: any = '';
-  searchKeyword?: any = '';
-  filterTop?: any = '';
-
   employees: any;
   constructor(private http: HttpClient) {}
 

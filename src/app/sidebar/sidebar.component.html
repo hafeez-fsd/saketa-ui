@@ -2,12 +2,18 @@
     <li class="list-group-item">
         <h6>Department</h6>
     </li>
-    <li *ngFor="let item of departments" class="list-group-item text-muted"  (click)="collectSidebarDept(item.name)">{{item.name}} ({{item.count}})</li>
+    <li  *ngFor="let item of departments; let i=index" class="list-group-item text-muted"
+        (click)="collectSidebarDept(item.name, i)">
+        <span [class.text-info]="selectedIndexDept==i">
+            {{item.name}} ({{item.count}})
+        </span>
+    </li>
 </ul>
 
 <ul>
     <li class="list-group-item">
         <h6>Office</h6>
     </li>
-    <li *ngFor="let item of officeLocations" class="list-group-item text-muted" (click)="collectSidebarOfficeLocation(item.name)">{{item.name}} ({{item.count}})</li>
+    <li #officePlaceEleRef *ngFor="let item of officeLocations; let i=index" class="list-group-item text-muted"
+        (click)="collectSidebarOfficeLocation(item.name, i)"><span [class.text-info]="selectedIndexOfficePlace==i">{{item.name}} ({{item.count}})</span></li>
 </ul>
