@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DoCheck, Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { Employee } from '../models/employee';
+import { APIResponse } from '../models/api-response';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  baseUrl: string = 'http://localhost:3000';
-  endPoint: string = '/employees';
+  baseUrl: string = 'https://localhost:7112/api';
+  endPoint: string = '/employee';
   url: string = `${this.baseUrl}${this.endPoint}`;
   employees: any;
   constructor(private http: HttpClient) {}
@@ -23,17 +24,17 @@ export class DataService {
   //Methods for CRUD Operations
 
   //Create
-  addEmployee(emp: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.url, emp, this.httpOptions);
+  addEmployee(emp: Employee): Observable<APIResponse<Employee>> {
+    return this.http.post<APIResponse<Employee>>(this.url, emp, this.httpOptions);
   }
 
   //Read
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.url);
+  getEmployees(): Observable<APIResponse<Employee[]>> {
+    return this.http.get<APIResponse<Employee[]>>(`${this.url}`);
   }
 
-  getEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.url}/${id}`);
+  getEmployee(id: number): Observable<APIResponse<Employee>> {
+    return this.http.get<APIResponse<Employee>>(`${this.url}/${id}`);
   }
 
   //Update
@@ -42,8 +43,8 @@ export class DataService {
   }
 
   //Delete
-  deleteEmployee(id: number): Observable<Employee> {
-    return this.http.delete<Employee>(`${this.url}/${id}`);
+  deleteEmployee(id: number): Observable<APIResponse<Employee>> {
+    return this.http.delete<APIResponse<Employee>>(`${this.url}/${id}`);
   }
 
 }  

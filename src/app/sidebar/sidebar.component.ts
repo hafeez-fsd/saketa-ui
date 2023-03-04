@@ -59,7 +59,7 @@ export class SidebarComponent implements OnInit {
   loadData() {
     let employees: Employee[];
     this.dataService.getEmployees().subscribe((res) => {
-      employees = res;
+      employees = res.data;
       this.departments.forEach((d) => {
         d.count = employees.filter(
           (e: Employee) => e.dept == d.name

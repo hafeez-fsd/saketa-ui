@@ -59,7 +59,7 @@ export class AditEmployeeComponent implements OnChanges {
 
   loadData(){
     this.dataService.getEmployee(this.id).subscribe(emp=>{
-      this.employee=emp;
+      this.employee=emp.data;
     });
   }
 

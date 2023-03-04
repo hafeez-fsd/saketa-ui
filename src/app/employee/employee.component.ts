@@ -52,7 +52,9 @@ export class EmployeeComponent implements OnInit {
 
   loadData() {
     this.dataService.getEmployees().subscribe(data => {
-      this.rawData=data;
+
+      this.rawData=data.data;
+
       this.filteredData = this.rawData;
     });
   }
